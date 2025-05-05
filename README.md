@@ -14,4 +14,4 @@ Bu proje, basit bir Quiz API’sidir. Kullanıcıların quiz sorularını alabil
 
 1. Repoyu klonlayın:
    ```bash
-   ggit clone https://github.com/kullaniciadi/QuizApp-Backend-Spring-Boot.git
+   git clone https://github.com/kullaniciadi/QuizApp-Backend-Spring-Boot.git
