@@ -1,6 +1,6 @@
 # Quiz API
 
-Bu proje, basit bir Quiz API’sidir. Kullanıcıların quiz sorularını alabileceği ve CRUD (Create, Read, Update, Delete) işlemleri yapabileceği bir backend API sunar.
+Bu proje, bir işe alım platformu api’sidir. Kullanıcıların quiz sorularını alabileceği yaratabileceği ve CRUD (Create, Read, Update, Delete) işlemleri yapabileceği bir backend API sunar.
 
 ## Özellikler
 
@@ -8,7 +8,7 @@ Bu proje, basit bir Quiz API’sidir. Kullanıcıların quiz sorularını alabil
 ✅ Yeni quiz sorusu ekleme  
 ✅ Quiz sorusu güncelleme  
 ✅ Quiz sorusu silme  
-✅ RESTful API mimarisi
+✅ RESTful API mimarisi ve bir çok servis
 
 ## Kurulum
 
