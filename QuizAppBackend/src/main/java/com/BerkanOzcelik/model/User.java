@@ -3,23 +3,17 @@ package com.BerkanOzcelik.model;
 import java.util.Collection;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.BerkanOzcelik.enums.UserRole;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 @Entity
 @Table(name = "user")
 @Getter
@@ -40,6 +34,10 @@ public class User extends BaseEntity implements UserDetails {
     @Column(name = "user_role")
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
+
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private List<Questions> questions;
 
     @ManyToOne
     @JoinColumn(name = "department_id") // department_id foreign key ismi

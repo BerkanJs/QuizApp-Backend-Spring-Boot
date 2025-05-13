@@ -1,13 +1,10 @@
 package com.BerkanOzcelik.service;
 
-import com.BerkanOzcelik.dto.AuthRequest;
-import com.BerkanOzcelik.dto.AuthResponse;
-import com.BerkanOzcelik.dto.DtoUser;
-import com.BerkanOzcelik.dto.RefreshTokenRequest;
+import com.BerkanOzcelik.dto.*;
 
 public interface IAuthenticationService {
 
-    public DtoUser register(AuthRequest input);
+    public DtoUser register(DtoUserIU input);
 
     public AuthResponse authenticate(AuthRequest input);
 

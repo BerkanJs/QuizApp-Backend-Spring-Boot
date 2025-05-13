@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.BerkanOzcelik.enums.QuestionType;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,6 +21,7 @@ public class DtoQuestions extends DtoBase {
 
     private List<String> options;
 
+    @JsonProperty("correctOption")
     private String option; 
 
     private Date reviewedBy;

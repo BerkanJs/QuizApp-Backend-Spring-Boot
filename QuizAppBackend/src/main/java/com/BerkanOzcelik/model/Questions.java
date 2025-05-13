@@ -23,8 +23,8 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "questions")
-@Setter
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Questions extends BaseEntity {
@@ -53,13 +53,15 @@ public class Questions extends BaseEntity {
     @Column(name = "question_point")
     private Long questionPoint;
 
-    @OneToOne
-    private User userId;
-
-    @OneToOne
-    private Departments departmentId;
+    @ManyToOne
+    @JoinColumn(name = "user_id")  // user_id foreign key ismi
+    private User user; // ManyToOne, çünkü her kullanıcı birden fazla soruya sahip olabilir.
 
     @ManyToOne
-    private Categories categorieId;
+    @JoinColumn(name = "department_id")  // department_id foreign key ismi
+    private Departments department;
 
+    @ManyToOne
+    @JoinColumn(name = "category_id")  // category_id foreign key ismi
+    private Categories category;
 }

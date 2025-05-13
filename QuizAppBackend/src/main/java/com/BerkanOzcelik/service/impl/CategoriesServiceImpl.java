@@ -40,7 +40,7 @@ public class CategoriesServiceImpl implements ICategoriesService {
 
         Categories category = new Categories();
         category.setCategoryName(dto.getCategoryName());
-        category.setDepartmentId(department.get());
+        category.setDepartment(department.get());
 
         Categories savedCategory = categoriesRepository.save(category);
         return mapToDto(savedCategory);
@@ -82,7 +82,7 @@ public class CategoriesServiceImpl implements ICategoriesService {
 
         Categories updatedCategory = category.get();
         updatedCategory.setCategoryName(dto.getCategoryName());
-        updatedCategory.setDepartmentId(department.get());
+        updatedCategory.setDepartment(department.get());
 
         Categories savedCategory = categoriesRepository.save(updatedCategory);
         return mapToDto(savedCategory);
@@ -103,7 +103,7 @@ public class CategoriesServiceImpl implements ICategoriesService {
     private DtoCategories mapToDto(Categories category) {
         DtoCategories dto = new DtoCategories();
         dto.setCategoryName(category.getCategoryName());
-        dto.setDepartmentId(category.getDepartmentId().getId());
+        dto.setDepartmentId(category.getDepartment().getId());
         dto.setId(category.getId());
         dto.setCreateTime(category.getCreateTime());
         return dto;

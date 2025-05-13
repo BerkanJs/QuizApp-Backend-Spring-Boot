@@ -1,9 +1,6 @@
 package com.BerkanOzcelik.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +18,7 @@ public class Categories extends BaseEntity {
     private String categoryName;
 
     @ManyToOne
-    private Departments departmentId;
-    
+    @JoinColumn(name = "department_id")
+    private Departments department;
 }
+

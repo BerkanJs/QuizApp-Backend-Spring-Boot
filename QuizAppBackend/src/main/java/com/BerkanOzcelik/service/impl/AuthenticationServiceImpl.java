@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.Optional;
 import java.util.UUID;
 
+import com.BerkanOzcelik.dto.*;
+import com.BerkanOzcelik.model.Departments;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -11,10 +13,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.BerkanOzcelik.dto.AuthRequest;
-import com.BerkanOzcelik.dto.AuthResponse;
-import com.BerkanOzcelik.dto.DtoUser;
-import com.BerkanOzcelik.dto.RefreshTokenRequest;
 import com.BerkanOzcelik.exception.BaseException;
 import com.BerkanOzcelik.exception.ErrorMessage;
 import com.BerkanOzcelik.exception.MessageType;
@@ -65,14 +63,33 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
     }
 
     @Override
-    public DtoUser register(AuthRequest input) {
+    public DtoUser register(DtoUserIU input) {
+        User user = new User();
+        user.setCreateTime(new Date());
+        user.setUsername(input.getUsername());
+        user.setPassword(passwordEncoder.encode(input.getPassword()));
+        user.setEmail(input.getEmail());
+        user.setUserRole(input.getUserRole());
+
+        if (input.getDepartmentId() != null) {
+            Departments department = new Departments();
+            department.setId(input.getDepartmentId());
+            user.setDepartment(department);
+        }
+
+        User savedUser = userRepository.save(user);
 
         DtoUser dtoUser = new DtoUser();
-
-        User savedUser = userRepository.save(createUser(input));
         BeanUtils.copyProperties(savedUser, dtoUser);
+
+        if (savedUser.getDepartment() != null) {
+            dtoUser.setDepartmentId(savedUser.getDepartment().getId());
+        }
+
         return dtoUser;
     }
+
+
 
     @Override
     public AuthResponse authenticate(AuthRequest input) {

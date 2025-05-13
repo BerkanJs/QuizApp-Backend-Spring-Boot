@@ -2,6 +2,7 @@ package com.BerkanOzcelik.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
@@ -29,5 +30,11 @@ public class Departments extends BaseEntity {
     private List<Exams> exams;
 
     @OneToMany(mappedBy = "department")
+    @JsonIgnore
     private List<User> users;
+
+
+    @OneToMany(mappedBy = "department")
+    @JsonIgnore
+    private List<Questions> questions;
 }
