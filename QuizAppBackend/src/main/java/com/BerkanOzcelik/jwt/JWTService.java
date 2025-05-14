@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.Base64.Decoder;
 import java.util.function.Function;
 
+import com.BerkanOzcelik.model.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -31,9 +32,11 @@ public class JWTService {
     // Kullanıcıya geri dönecek token burada üretilir.
 
     public String generateToken(UserDetails userDetails) {
+        User user = (User) userDetails;
 
         return Jwts.builder()
                 .setSubject(userDetails.getUsername())
+                .claim("role", user.getUserRole().name())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 2))
                 .signWith(getKey(), SignatureAlgorithm.HS256)
@@ -90,6 +93,10 @@ public class JWTService {
     public Key getKey() {
         byte[] bytes = Decoders.BASE64.decode(SECRET_KEY);
         return Keys.hmacShaKeyFor(bytes);
+    }
+
+    public String getRoleByToken(String token) {
+        return exportToken(token, claims -> claims.get("role", String.class));
     }
 
 }

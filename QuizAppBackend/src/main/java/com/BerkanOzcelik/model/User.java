@@ -6,6 +6,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.BerkanOzcelik.enums.UserRole;
@@ -45,6 +46,9 @@ public class User extends BaseEntity implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        if (this.userRole != null) {
+            return List.of(new SimpleGrantedAuthority("ROLE_" + this.userRole.name()));
+        }
+        return List.of(); // Eğer userRole null ise boş liste dönebiliriz
     }
 }
