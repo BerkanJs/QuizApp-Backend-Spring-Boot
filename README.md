@@ -2,7 +2,7 @@
 
 ## 📝 Proje Açıklaması
 
-**AtmacaApp**, şirket içi veya dışı kullanıcıların sınavlara katılabildiği, sorulara yanıt verebildiği ve sonuçlarının değerlendirildiği **Spring Boot tabanlı bir mülakat platformudur**. Uygulama, kullanıcı yönetimi, soru yönetimi, sınav organizasyonu ve sonuç takibi gibi temel modülleri içerir.
+**App**, şirket içi veya dışı kullanıcıların sınavlara katılabildiği, sorulara yanıt verebildiği ve sonuçlarının değerlendirildiği **Spring Boot tabanlı bir mülakat platformudur**. Uygulama, kullanıcı yönetimi, soru yönetimi, sınav organizasyonu ve sonuç takibi gibi temel modülleri içerir.
 
 ## 🎯 Temel Özellikler
 
