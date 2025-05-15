@@ -1,8 +1,9 @@
+
 # - Mülakat Platformu
 
 ## 📝 Proje Açıklaması
 
-**App**, şirket içi veya dışı kullanıcıların sınavlara katılabildiği, sorulara yanıt verebildiği ve sonuçlarının değerlendirildiği **Spring Boot tabanlı bir mülakat platformudur**. Uygulama, kullanıcı yönetimi, soru yönetimi, sınav organizasyonu ve sonuç takibi gibi temel modülleri içerir.
+Şirket içi veya dışı kullanıcıların sınavlara katılabildiği, sorulara yanıt verebildiği ve sonuçlarının değerlendirildiği **Spring Boot tabanlı bir mülakat platformudur**. Uygulama, kullanıcı yönetimi, soru yönetimi, sınav organizasyonu ve sonuç takibi gibi temel modülleri içerir.
 
 ## 🎯 Temel Özellikler
 
@@ -18,17 +19,19 @@
 ## 🏗️ Mimari Yapı
 
 Uygulama katmanlı bir yapı üzerine kurulmuştur:
-com.berkanozcelik.atmacaapp
-├── config → Security & genel konfigürasyon
-├── controller → REST API endpoint'leri
-├── dto → Veri transfer nesneleri
-├── entity → JPA Entity tanımları
-├── repository → Spring Data JPA repository arayüzleri
-├── service → İş mantığı (business logic)
-├── service.impl → Servislerin implementasyonları
-├── exception → Özel hata sınıfları
-└── security → JWT filtreleri, authentication servisleri
 
+```
+com.berkanozcelik.atmacaapp
+├── config                 → Security & genel konfigürasyon
+├── controller             → REST API endpoint'leri
+├── dto                    → Veri transfer nesneleri
+├── entity                 → JPA Entity tanımları
+├── repository             → Spring Data JPA repository arayüzleri
+├── service                → İş mantığı (business logic)
+├── service.impl           → Servislerin implementasyonları
+├── exception              → Özel hata sınıfları
+└── security               → JWT filtreleri, authentication servisleri
+```
 
 > Proje SOLID prensiplerine uygun olacak şekilde aşağıdaki tasarım kararlarını benimser:
 > - **S**ingle Responsibility: Her sınıf yalnızca kendi sorumluluğuna odaklanır.
@@ -62,15 +65,21 @@ POST /register
   "userRole": "ADMIN",
   "department": { "id": 1 }
 }
+```
 
 ### 🔐 Giriş Yapma
 
+```http
 POST /authenticate
 {
   "username": "john4",
   "password": "123456"
 }
+```
+
 ### ❓ Soru Oluşturma
+
+```http
 POST /questions/create
 {
   "questionText": "Hangisi bir frontend framework değildir?",
@@ -82,33 +91,43 @@ POST /questions/create
   "departmentId": 1,
   "categoryId": 1
 }
+```
+
 ### 📝 Cevap Gönderme
 
-💾 Teknolojiler
-Java 17
+```http
+POST /api/user-answers
+{
+  "userId": 1,
+  "questionId": 2,
+  "answer": "Spring"
+}
+```
 
-Spring Boot 3.x
+## 💾 Teknolojiler
 
-Spring Security & JWT
+- **Java 17**
+- **Spring Boot 3.x**
+- **Spring Security & JWT**
+- **Spring Data JPA (Hibernate)**
+- **PostgreSQL / H2 (dev)**
+- **Lombok**
+- **MapStruct (isteğe bağlı DTO mapping)**
+- **Postman (API test)**
 
-Spring Data JPA (Hibernate)
+## 🚀 Kurulum
 
-PostgreSQL / H2 (dev)
-
-Lombok
-
-MapStruct (isteğe bağlı DTO mapping)
-
-Postman (API test)
-
-🚀 Kurulum
-
+```bash
 git clone https://github.com/berkanozcelik/atmaca-app.git
 cd atmaca-app
 ./mvnw spring-boot:run
+```
 
-📂 DTO Örnekleri
+Uygulama `http://localhost:8080` üzerinden yayında olacaktır.
 
+## 📂 DTO Örnekleri
+
+```java
 public class RegisterRequest {
     private String username;
     private String email;
@@ -116,7 +135,9 @@ public class RegisterRequest {
     private UserRole userRole;
     private Department department;
 }
+```
 
+```java
 public class QuestionDto {
     private String questionText;
     private String questionType;
@@ -127,9 +148,15 @@ public class QuestionDto {
     private Long departmentId;
     private Long categoryId;
 }
-👨‍💻 Geliştirici
-Berkan Özçelik
-Email: berkanozcelik3.6@gmail.com
-LinkedIn: linkedin.com/in/berkanozcelik
+```
+
+
+## 👨‍💻 Geliştirici
+
+**Berkan Özçelik**  
+Email: berkanozcelik3.6@gmail.com  
+LinkedIn: [linkedin.com/in/berkanozcelik](https://linkedin.com/in/berkanozcelik)
+
+---
 
 
