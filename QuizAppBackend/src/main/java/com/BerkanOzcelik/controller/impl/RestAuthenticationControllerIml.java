@@ -2,6 +2,7 @@ package com.BerkanOzcelik.controller.impl;
 
 import com.BerkanOzcelik.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,6 +13,8 @@ import com.BerkanOzcelik.controller.RootEntity;
 import com.BerkanOzcelik.service.IAuthenticationService;
 
 import jakarta.validation.Valid;
+
+import java.util.List;
 
 @RestController
 public class RestAuthenticationControllerIml extends RestBaseController implements IRestAuthenticationController  {
@@ -36,6 +39,13 @@ public class RestAuthenticationControllerIml extends RestBaseController implemen
     @Override
     public RootEntity<AuthResponse> refreshToken(@Valid @RequestBody RefreshTokenRequest input) {
         return ok(authenticationService.refreshToken(input));
-    }   
+    }
+
+
+    @GetMapping("/users")
+    @Override
+    public RootEntity<List<DtoUser>> getAllUsers() {
+        return ok(authenticationService.getAllUsers());
+    }
 
 }

@@ -1,8 +1,10 @@
 package com.BerkanOzcelik.service.impl;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import com.BerkanOzcelik.dto.*;
 import com.BerkanOzcelik.model.Departments;
@@ -152,5 +154,28 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
        
         userRepository.deleteById(userId);
     }
+
+    @Override
+    public List<DtoUser> getAllUsers() {
+        List<User> users = userRepository.findAll();
+        return users.stream()
+                .map(user -> {
+                    DtoUser dto = new DtoUser();
+                    dto.setId(user.getId());
+                    dto.setUsername(user.getUsername());
+                    dto.setEmail(user.getEmail());
+                    dto.setUserRole(user.getUserRole());
+
+
+
+                    if (user.getDepartment() != null) {
+                        dto.setDepartmentId(user.getDepartment().getId());
+                    }
+
+                    return dto;
+                })
+                .collect(Collectors.toList());
+    }
+
 
 }
