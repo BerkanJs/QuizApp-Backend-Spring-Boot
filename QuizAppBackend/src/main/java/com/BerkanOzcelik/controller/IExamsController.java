@@ -2,6 +2,8 @@ package com.BerkanOzcelik.controller;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
 import com.BerkanOzcelik.dto.DtoExams;
@@ -15,7 +17,7 @@ public interface IExamsController {
 
     ResponseEntity<RootEntity<String>> deleteExam(Long examId);
 
-    ResponseEntity<RootEntity<List<DtoExams>>> listExams();
+    ResponseEntity<RootEntity<Page<DtoExams>>> listExams(Pageable pageable);
 
     ResponseEntity<RootEntity<DtoExams>> updateExamStatus(Long examId, ExamStatus examStatus);
 }

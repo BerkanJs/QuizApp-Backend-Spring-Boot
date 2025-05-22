@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.BerkanOzcelik.dto.DtoExamResults;
@@ -57,21 +59,11 @@ public class ExamResultServiceImpl implements IExamResultService {
 
 
     @Override
-    public List<DtoExamResults> getAllExamResults() {
-
-        List<ExamResults> results = examResultRepository.findAll();
-
-
-        return results.stream().map(result -> {
-            DtoExamResults dto = new DtoExamResults();
-            dto.setId(result.getId());
-            dto.setUserId(result.getUserId().getId());
-            dto.setExamId(result.getExamId().getId());
-            dto.setScore(result.getScore());
-            dto.setExamResultsStatus(result.getExamResultsStatus());
-            return dto;
-        }).collect(Collectors.toList());
+    public Page<DtoExamResults> getAllExamResults(Pageable pageable) {
+        Page<ExamResults> resultsPage = examResultRepository.findAll(pageable);
+        return resultsPage.map(this::convertToDto);
     }
+
 
     @Override
     public List<DtoExamResults> getExamResultsByExamId(Long examId) {
@@ -81,15 +73,21 @@ public class ExamResultServiceImpl implements IExamResultService {
             System.out.println("No results found for examId: " + examId);
         }
 
-        return results.stream().map(result -> {
-            DtoExamResults dto = new DtoExamResults();
-            dto.setId(result.getId());
-            dto.setUserId(result.getUserId().getId());
-            dto.setExamId(result.getExamId().getId());
-            dto.setScore(result.getScore());
-            dto.setExamResultsStatus(result.getExamResultsStatus());
-            return dto;
-        }).collect(Collectors.toList());
+        return results.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
+    }
+
+
+
+    private DtoExamResults convertToDto(ExamResults result) {
+        DtoExamResults dto = new DtoExamResults();
+        dto.setId(result.getId());
+        dto.setUserId(result.getUserId().getId());
+        dto.setExamId(result.getExamId().getId());
+        dto.setScore(result.getScore());
+        dto.setExamResultsStatus(result.getExamResultsStatus());
+        return dto;
     }
 
 

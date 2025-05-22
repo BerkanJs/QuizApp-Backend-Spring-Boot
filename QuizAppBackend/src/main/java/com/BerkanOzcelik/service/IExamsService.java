@@ -2,6 +2,8 @@ package com.BerkanOzcelik.service;
 
 import com.BerkanOzcelik.dto.DtoExams;
 import com.BerkanOzcelik.enums.ExamStatus;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -12,7 +14,9 @@ public interface IExamsService {
 
     void deleteExam(Long examId);
 
-    List<DtoExams> listExams();
+
+
+    Page<DtoExams> listExams(Pageable pageable);
 
     DtoExams updateExamStatus(Long examId, ExamStatus examStatus);
 

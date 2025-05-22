@@ -2,6 +2,8 @@ package com.BerkanOzcelik.controller.impl;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,10 +51,9 @@ public class QuestionsControllerImpl extends RestBaseController implements IQues
         return ResponseEntity.ok(ok("Question deleted successfully"));
     }
 
-    @Override
     @GetMapping("/all")
-    public ResponseEntity<RootEntity<List<DtoQuestions>>> getAllQuestions() {
-        List<DtoQuestions> allQuestions = questionsService.getAllQuestions();
+    public ResponseEntity<RootEntity<Page<DtoQuestions>>> getAllQuestions(Pageable pageable) {
+        Page<DtoQuestions> allQuestions = questionsService.getAllQuestions(pageable);
         return ResponseEntity.ok(ok(allQuestions));
     }
 

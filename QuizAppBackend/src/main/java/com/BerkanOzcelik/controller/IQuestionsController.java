@@ -2,6 +2,8 @@ package com.BerkanOzcelik.controller;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
 import com.BerkanOzcelik.dto.DtoQuestions;
@@ -16,5 +18,6 @@ public interface IQuestionsController {
 
     ResponseEntity<RootEntity<String>> deleteQuestion(Long questionId);
 
-    ResponseEntity<RootEntity<List<DtoQuestions>>> getAllQuestions();
+
+    ResponseEntity<RootEntity<Page<DtoQuestions>>> getAllQuestions(Pageable pageable);
 }

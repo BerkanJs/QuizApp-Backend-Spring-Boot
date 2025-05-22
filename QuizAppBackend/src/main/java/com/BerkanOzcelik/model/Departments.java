@@ -27,6 +27,7 @@ public class Departments extends BaseEntity {
     private String departmentDescription;
 
     @OneToMany(mappedBy = "department")
+    @JsonIgnore
     private List<Exams> exams;
 
     @OneToMany(mappedBy = "department")

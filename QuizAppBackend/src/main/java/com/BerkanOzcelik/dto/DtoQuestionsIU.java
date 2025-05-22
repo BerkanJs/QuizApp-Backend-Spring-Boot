@@ -33,4 +33,6 @@ public class DtoQuestionsIU {
     private Long departmentId;
 
     private Long categoryId;
+
+    private String photoUrl;
 }

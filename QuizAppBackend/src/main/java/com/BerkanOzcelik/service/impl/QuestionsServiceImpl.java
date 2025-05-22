@@ -3,6 +3,8 @@ package com.BerkanOzcelik.service.impl;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.BerkanOzcelik.dto.DtoQuestions;
@@ -100,11 +102,11 @@ public class QuestionsServiceImpl implements IQuestionService {
     }
 
     @Override
-    public List<DtoQuestions> getAllQuestions() {
-        return questionsRepository.findAll().stream()
-                .map(this::convertToDto)
-                .collect(Collectors.toList());
+    public Page<DtoQuestions> getAllQuestions(Pageable pageable) {
+        return questionsRepository.findAll(pageable)
+                .map(this::convertToDto);
     }
+
 
     private DtoQuestions convertToDto(Questions question) {
         DtoQuestions dto = new DtoQuestions();

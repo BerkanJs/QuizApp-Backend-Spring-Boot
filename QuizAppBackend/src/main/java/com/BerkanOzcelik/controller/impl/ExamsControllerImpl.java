@@ -2,6 +2,8 @@ package com.BerkanOzcelik.controller.impl;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,10 +51,11 @@ public class ExamsControllerImpl extends RestBaseController implements IExamsCon
 
     @Override
     @GetMapping("/list")
-    public ResponseEntity<RootEntity<List<DtoExams>>> listExams() {
-        List<DtoExams> examsList = examsService.listExams();
-        return ResponseEntity.ok(ok(examsList));
+    public ResponseEntity<RootEntity<Page<DtoExams>>> listExams(Pageable pageable) {
+        Page<DtoExams> examsPage = examsService.listExams(pageable);
+        return ResponseEntity.ok(ok(examsPage));
     }
+
 
     @Override
     @PutMapping("/updateStatus/{examId}")

@@ -15,6 +15,8 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -85,23 +87,24 @@ public class ExamsServiceImpl implements IExamsService {
     }
 
     @Override
-    public List<DtoExams> listExams() {
-        List<Exams> examsList = examsRepository.findAll();
-        return examsList.stream().map(exam -> {
+    public Page<DtoExams> listExams(Pageable pageable) {
+        Page<Exams> examsPage = examsRepository.findAll(pageable);
+
+        return examsPage.map(exam -> {
             DtoExams dto = new DtoExams();
             BeanUtils.copyProperties(exam, dto, "department");
 
-            // Check if department is not null before accessing its id
             if (exam.getDepartment() != null) {
                 dto.setDepartmentId(exam.getDepartment().getId());
             } else {
-                // Set a default value or handle the case where department is null
-                dto.setDepartmentId(null);  // Or set a default value if necessary
+                dto.setDepartmentId(null);
             }
 
             return dto;
-        }).collect(Collectors.toList());
+        });
     }
+
+
 
 
 

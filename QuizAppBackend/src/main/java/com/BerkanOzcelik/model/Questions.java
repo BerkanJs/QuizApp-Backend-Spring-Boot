@@ -64,4 +64,7 @@ public class Questions extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "category_id")  // category_id foreign key ismi
     private Categories category;
+
+    @Column(name = "photo_url")
+    private String photoUrl;
 }

@@ -34,6 +34,7 @@ public class DtoQuestions extends DtoBase {
 
     private Long departmentId;  
 
-    private Long categoryId;  
-    
+    private Long categoryId;
+
+    private String photoUrl;
 }
